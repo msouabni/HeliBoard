@@ -1318,6 +1318,11 @@ public final class PointerTracker implements PointerTrackerQueue.Element,
         }
 
         final int code = key.getCode();
+        // local touch log for per-thumb calibration (never in password fields)
+        if (mKeyboard != null && !mKeyboard.mId.isPasswordInput()) {
+            TouchLogger.log(eventTime, mPointerId, code, key.getX(), key.getY(),
+                    key.getWidth(), key.getHeight(), mStartX, mStartY);
+        }
         callListenerOnCodeInput(key, code, x, y, eventTime, false);
         callListenerOnRelease(key, code, false);
     }
