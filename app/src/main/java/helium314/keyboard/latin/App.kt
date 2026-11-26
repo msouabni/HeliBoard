@@ -4,6 +4,7 @@ package helium314.keyboard.latin
 import android.app.Application
 import android.content.Context
 import android.os.Build
+import helium314.keyboard.keyboard.TouchLogger
 import helium314.keyboard.keyboard.emoji.SupportedEmojis
 import helium314.keyboard.latin.define.DebugFlags
 import helium314.keyboard.latin.dictionary.ExpandableDictionaryUtils
@@ -27,6 +28,7 @@ class App : Application() {
         app = this
         val ctx: Context = this
         DebugFlags.init(this) // needed by several other inits, so do it first
+        TouchLogger.init(this)
 
         val scope = CoroutineScope(Dispatchers.Default)
         // other inits can be in parallel, except what depends on SubtypeSettings
